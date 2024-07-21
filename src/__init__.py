@@ -1,3 +1,4 @@
+import socketio
 from flask import Flask, make_response, jsonify
 import os
 import pyodbc
@@ -119,7 +120,7 @@ def create_app(test_config=None):
 
 if __name__ == '__main__':
     app = create_app()
-    #app.run(host='0.0.0.0', port=5000)
-    socketio.run(app, host='0.0.0.0', port=8080, debug=True)
+    app.run(host='0.0.0.0', port=5000)
+    #socketio.run(app, host='0.0.0.0', port=8080, debug=True)
 
 

@@ -1,4 +1,4 @@
-runtime: python312
+runtime: python3124
 entrypoint: gunicorn -b :$PORT src:app
 
 env_variables:
@@ -7,4 +7,4 @@ env_variables:
 
 handlers:
 - url: /.*
-  script: __init__.py
+  script: auto

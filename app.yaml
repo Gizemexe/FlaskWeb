@@ -1,0 +1,10 @@
+runtime: python312
+entrypoint: gunicorn -b :$PORT src:app
+
+env_variables:
+  # Diğer çevresel değişkenler
+  LD_LIBRARY_PATH: "/path/to/odbc/libraries"
+
+handlers:
+- url: /.*
+  script: __init__.py

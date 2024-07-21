@@ -1,0 +1,1290 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "",
+    "version": "v1",
+    "title": "Flask API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "tags": [
+    {
+      "name": "Products API",
+      "description": "Test API"
+    }
+  ],
+  "servers": [
+        {
+        "url": "/"
+        }
+    ],
+
+   "components": {
+     "securitySchemes": {
+       "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+      }
+  },
+  "security": [
+    {
+        "bearerAuth": []
+    }
+],
+
+        "schemas": {
+
+            "Users": {
+                "type": "object",
+                "properties": {
+                    "username": {
+                    "type": "string"
+                    },
+                    "email": {
+                    "type": "string"
+                    }
+                }
+            },
+            "User": {
+                "type": "object",
+                "properties": {
+                    "Id": {
+                    "type": "integer"
+                    }
+                }
+            },
+            "Register": {
+                "type": "object",
+                "properties": {
+                    "username": {
+                    "type": "string"
+                    },
+                    "email": {
+                    "type": "string"
+                    },
+                    "password": {
+                    "type": "string"
+                    }
+                }
+            },
+            "Login": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                    "type": "string"
+                    },
+                    "password": {
+                    "type": "string"
+                    }
+                }
+            },
+
+          "Add": {
+                "type": "object",
+                "properties": {
+                    "userId": {
+                    "type": "integer"
+                    },
+                    "productId": {
+                    "type": "integer"
+                    },
+                    "quantity": {
+                    "type": "integer"
+                    }
+                }
+            },
+
+          "Products": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                    "type": "string"
+                    },
+                    "price": {
+                    "type": "string"
+                    }
+                }
+            },
+
+            "Categories": {
+                "type": "object",
+                "properties": {
+                    "Id": {
+                    "type": "integer"
+                    },
+                    "name": {
+                    "type": "string"
+                    }
+                }
+            },
+          "Carts": {
+                "type": "object",
+                "properties": {
+                    "ProductID": {
+                    "type": "integer"
+                    },
+                    "Quantity": {
+                    "type": "integer"
+                    }
+                }
+            },
+
+          "Id":{
+            "type" : "integer",
+            "properties" : {
+                "name" : {
+                    "type" : "integer"
+                }
+            }
+        },
+           "Orders": {
+                "type": "object",
+                "properties": {
+                    "UserID": {
+                    "type": "integer"
+                    },
+                  "OrderNumber": {
+                    "type": "string"
+                    },
+                  "Total": {
+                    "type": "integer"
+                    },
+                  "Address": {
+                    "type": "string"
+                    },
+                  "Status": {
+                    "type": "string"
+                    }
+                }
+            },
+
+           "Address": {
+                "type": "object",
+                "properties": {
+                  "Address": {
+                    "type": "string"
+                    }
+                }
+            },
+
+          "Send": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                    },
+                  "address": {
+                    "type": "string"
+                    },
+                  "latitude": {
+                    "type": "string"
+                  },
+                  "longitude":{
+                    "type": "string"
+                  }
+                }
+            },
+
+          "OrderNumber": {
+                "type": "object",
+                "properties": {
+                  "OrderNumber": {
+                    "type": "string"
+                    }
+                }
+            },
+
+          "UpdateStatus": {
+                "type": "object",
+                "properties": {
+                  "OrderId": {
+                    "type": "integer"
+                    }
+                }
+            },
+
+
+          "UpdateStatusResponse": {
+                "type": "object",
+                "properties": {
+                  "Status": {
+                    "type": "string",
+                    "description": "Status message indicating the success of the operation"
+                    }
+                }
+            },
+
+          "OrderDetails": {
+                "type": "object",
+                "properties": {
+                    "OrderID": {
+                    "type": "integer"
+                    },
+                  "ProductId": {
+                    "type": "string"
+                    },
+                  "Quantity": {
+                    "type": "integer"
+                    },
+                  "UnitPrice": {
+                    "type": "string"
+                    }
+                }
+            },
+
+          "update":{
+              "type": "object",
+              "properties" :{
+                "Id": {
+                    "type": "integer"
+                    },
+                  "UserId": {
+                    "type": "integer"
+                  },
+                  "ProductId": {
+                    "type": "integer"
+                  },
+                  "Quantity": {
+                    "type": "integer"
+                  }
+              }
+            },
+          "updateUser":{
+              "type": "object",
+              "properties" :{
+                  "Username": {
+                    "type": "string"
+                  },
+                   "Phone": {
+                    "type": "string"
+                  },
+                "Birth Day": {
+                    "type": "string"
+                    },
+                  "Email": {
+                    "type": "string"
+                  }
+              }
+            },
+
+             "updatePassword":{
+              "type": "object",
+              "properties" :{
+                  "current_password": {
+                    "type": "string"
+                  },
+                  "new_password": {
+                    "type": "string"
+                  }
+              }
+            },
+              "RemoveFav": {
+                "type": "object",
+              "properties" :{
+                  "product_id": {
+                    "type": "integer"
+                  }
+              }
+              }
+        }
+    },
+     "paths": {
+        "/api/v1/users/GetAll": {
+
+            "get" :{
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get All Users",
+
+
+                "responses": {
+                "200": {
+                    "description": "Success",
+                    "schema": {
+                    "$ref": "#/components/schemas/Users"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/Users"
+                    }
+            }
+            }
+            }
+        },
+        "/api/v1/users/Get": {
+         "get": {
+        "tags": [
+            "Users"
+        ],
+        "summary": "Get User by Id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "This endpoint retrieves user information based on the user's token information.",
+        "responses": {
+            "200": {
+                "description": "Success",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Users"
+                        }
+                    }
+                }
+            },
+            "404": {
+                "description": "NOT FOUND",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Users"
+                        }
+                    }
+                }
+            }
+        }
+    }
+},
+       "/api/v1/users/Register": {
+         "post": {
+            "tags": [
+                "Users"
+            ],
+            "summary": "Register User",
+            "security": [],
+            "requestBody": {
+            "description": "Post New todo To Database",
+            "required": true,
+            "content": {
+                "application/json": {
+                "schema": {
+                    "$ref": "#/components/schemas/Register"
+                    }
+                }
+            }
+            },
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/Users"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/Users"
+                    }
+            }
+            }
+            }
+       },
+       "/api/v1/users/UpdateProfile": {
+         "put": {
+          "tags": [
+            "Users"
+          ],
+          "summary": "Update User Informations",
+           "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+          "requestBody": {
+            "description": "Update Existing todo On Database",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/updateUser"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/components/schemas/Users"
+              }
+            },
+            "404": {
+              "description": "NOT FOUND",
+              "schema": {
+                "$ref": "#/components/schemas/Users"
+              }
+            }
+          }
+        }
+        },
+
+       "/api/v1/users/ChangePassword": {
+         "put": {
+          "tags": [
+            "Users"
+          ],
+          "summary": "Update User Password",
+           "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+          "requestBody": {
+            "description": "Update Existing todo On Database",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/updatePassword"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/components/schemas/Users"
+              }
+            },
+            "404": {
+              "description": "NOT FOUND",
+              "schema": {
+                "$ref": "#/components/schemas/Users"
+              }
+            }
+          }
+        }
+        },
+
+       "/api/v1/favorites/GetFavorites": {
+         "get": {
+        "tags": [
+            "Favorites"
+        ],
+        "summary": "Get Users favorites",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "This endpoint retrieves user information based on the user's token information.",
+        "responses": {
+            "200": {
+                "description": "Success",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Users"
+                        }
+                    }
+                }
+            },
+            "404": {
+                "description": "NOT FOUND",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Users"
+                        }
+                    }
+                }
+            }
+        }
+    }
+},
+       "/api/v1/favorites/AddFavorite": {
+         "post": {
+            "tags": [
+                "Favorites"
+            ],
+            "summary": "Register User",
+            "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+            "requestBody": {
+            "description": "Post New todo To Database",
+            "required": true,
+            "content": {
+                "application/json": {
+                "schema": {
+                    "$ref": "#/components/schemas/Register"
+                    }
+                }
+            }
+            },
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/Users"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/Users"
+                    }
+            }
+            }
+            }
+       },
+
+       "/api/v1/favorites/RemoveFavorite": {
+         "delete": {
+           "tags": [
+             "Favorites"
+           ],
+           "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+           "requestBody": [
+             {
+               "description": "product id to delete",
+               "required": true,
+               "content": {
+                 "application/json": {
+                   "schema": {
+                     "$ref": "#/components/schemas/RemoveFav"
+                   }
+                 }
+                 }
+               }
+           ],
+           "summary": "Remove product from favorites",
+           "responses": {
+             "200": {
+               "description": "OK",
+               "schema": {
+                 "$ref": "#/components/schemas/Users"
+               }
+             },
+             "404": {
+               "description": "NOT FOUND",
+               "schema": {
+                 "$ref": "#/components/schemas/Users"
+               }
+             }
+           }
+         }
+       },
+
+       "/api/v1/auth/Login": {
+         "post": {
+            "tags": [
+                "Auth"
+            ],
+            "summary": "Login",
+            "requestBody": {
+            "description": "Post New todo To Database",
+            "required": true,
+            "content": {
+                "application/json": {
+                "schema": {
+                    "$ref": "#/components/schemas/Login"
+                    }
+                }
+            }
+            },
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/Login"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/Login"
+                    }
+            }
+            }
+            }
+       },
+
+       "/api/v1/products/Products": {
+          "get" :{
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get All Products",
+                "responses": {
+                "200": {
+                    "description": "Success",
+                    "schema": {
+                    "$ref": "#/components/schemas/Products"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/Products"
+                    }
+            }
+            }
+            }
+       },
+
+       "/api/v1/products/GetAllByCategoryId": {
+          "get" :{
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get All Products",
+            "parameters": [
+          {
+            "name": "categoryId",
+            "in": "query",
+            "description": "ID of category to fetch products",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+                "responses": {
+                "200": {
+                    "description": "Success",
+                    "schema": {
+                    "$ref": "#/components/schemas/Products"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/Products"
+                    }
+            }
+            }
+            }
+       },
+       "/api/v1/products/SearchProducts": {
+          "get" :{
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get All Searched Products",
+            "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "description": "search for fetch the products",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+                "responses": {
+                "200": {
+                    "description": "Success",
+                    "schema": {
+                    "$ref": "#/components/schemas/Products"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/Products"
+                    }
+            }
+            }
+            }
+       },
+
+       "/api/v1/carts/GetAll": {
+          "get" :{
+                "tags": [
+                    "Carts"
+                ],
+                "summary": "Get All ",
+            "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+                "responses": {
+                "200": {
+                    "description": "Success",
+                    "schema": {
+                    "$ref": "#/components/schemas/Carts"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/Carts"
+                    }
+            }
+            }
+            }
+       },
+
+        "/api/v1/carts/add": {
+            "post": {
+              "tags": [
+                "Carts"
+              ],
+              "summary": "Add",
+              "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+              "requestBody": {
+              "description": "Post New todo To Database",
+              "required": true,
+              "content": {
+                  "application/json": {
+                  "schema": {
+                      "$ref": "#/components/schemas/Add"
+                     }
+                 }
+              }
+            },
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/Add"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/Add"
+                    }
+            }
+            }
+            }
+       },
+
+       "/api/v1/carts/update": {
+         "put": {
+          "tags": [
+            "Carts"
+          ],
+          "summary": "Update",
+           "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+          "requestBody": {
+            "description": "Update Existing todo On Database",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/update"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/components/schemas/Users"
+              }
+            },
+            "404": {
+              "description": "NOT FOUND",
+              "schema": {
+                "$ref": "#/components/schemas/Users"
+              }
+            }
+          }
+        }
+        },
+
+       "/api/v1/carts/remove": {
+         "delete": {
+           "tags": [
+             "Carts"
+           ],
+           "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+           "parameters": [
+             {
+               "name": "CartId",
+               "in": "path",
+               "description": "cart id to delete",
+               "required": true,
+               "type": "integer",
+               "schema": {
+                 "$ref": "#/components/schemas/Id"
+               }
+             }
+           ],
+           "summary": "Delete todo",
+           "responses": {
+             "200": {
+               "description": "OK",
+               "schema": {
+                 "$ref": "#/components/schemas/Users"
+               }
+             },
+             "404": {
+               "description": "NOT FOUND",
+               "schema": {
+                 "$ref": "#/components/schemas/Users"
+               }
+             }
+           }
+         }
+       },
+
+        "/api/v1/categories/GetAll": {
+          "get": {
+            "tags": [
+              "Categories"
+            ],
+            "summary": "Get All Categroies",
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                  "$ref": "#/components/schemas/Categories"
+                }
+              },
+              "404": {
+                "description": "NOT FOUND",
+                "schema": {
+                  "$ref": "#/components/schemas/Categories"
+                }
+              }
+            }
+          }
+        },
+
+        "/api/v1/orders/create": {
+            "post": {
+              "tags": [
+                "Orders"
+              ],
+              "summary": "Create Order",
+              "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+              "requestBody": {
+              "description": "Post New todo To Database",
+              "required": true,
+              "content": {
+                  "application/json": {
+                  "schema": {
+                      "$ref": "#/components/schemas/Orders"
+                     }
+                 }
+              }
+            },
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/Orders"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/Orders"
+                    }
+            }
+            }
+            }
+       },
+
+        "/api/v1/orders/GetAll": {
+          "get" :{
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Get All ",
+            "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+                "responses": {
+                "200": {
+                    "description": "Success",
+                    "schema": {
+                    "$ref": "#/components/schemas/Orders"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/Orders"
+                    }
+            }
+            }
+            }
+       },
+
+        "/api/v1/orders/updateStatus": {
+            "post": {
+              "tags": [
+                "Orders"
+              ],
+              "summary": "Update Status Order",
+              "requestBody": {
+              "description": "Post New todo To Database",
+              "required": true,
+              "content": {
+                  "application/json": {
+                  "schema": {
+                      "$ref": "#/components/schemas/UpdateStatus"
+                     }
+                 }
+              }
+            },
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/UpdateStatusResponse"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/UpdateStatusResponse"
+                    }
+            }
+            }
+            }
+       },
+
+        "/api/v1/orders/getOrderIdByOrderNumber": {
+          "get": {
+            "tags": [
+              "Orders"
+            ],
+            "summary": "Get OrderID by OrderNumber",
+            "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+       "parameters": [
+          {
+            "name": "orderNumber",
+            "in": "query",
+            "description": "ID of user to fetch",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                  "$ref": "#/components/schemas/OrderNumber"
+                }
+              },
+              "404": {
+                "description": "NOT FOUND",
+                "schema": {
+                  "$ref": "#/components/schemas/OrderNumber"
+                }
+              }
+            }
+          }
+        },
+
+        "/api/v1/map/convert": {
+          "get" :{
+                "tags": [
+                    "Map"
+                ],
+                "summary": "Get Address",
+            "parameters": [
+          {
+            "name": "address",
+            "in": "query",
+            "description": "Address for convert to lat&lng ",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+                "responses": {
+                "200": {
+                    "description": "Success",
+                    "schema": {
+                    "$ref": "#/components/schemas/Address"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/Address"
+                    }
+            }
+            }
+            }
+       },
+
+      "/api/v1/map/send": {
+  "post": {
+    "tags": [
+      "Map"
+    ],
+    "summary": "Send request",
+    "requestBody": {
+      "description": "Data to be sent to the server",
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Send"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Addresses sent to server successfully"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "NOT FOUND",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Failed to send addresses to server"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+},
+ "/api/v1/map/get": {
+  "get": {
+    "tags": [
+      "Map"
+    ],
+    "summary": "Fetch location data",
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "latitude": {
+                    "type": "number",
+                    "example": 40.712776
+                  },
+                  "longitude": {
+                    "type": "number",
+                    "example": -74.005974
+                  }
+                }
+              }
+            },
+            "examples": {
+              "example-1": {
+                "summary": "Example Response",
+                "value": [
+                  {
+                    "latitude": 40.712776,
+                    "longitude": -74.005974
+                  },
+                  {
+                    "latitude": 34.052235,
+                    "longitude": -118.243683
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "An error occurred while fetching locations"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+},
+
+       "/api/v1/orderDetails/create": {
+            "post": {
+              "tags": [
+                "Order Details"
+              ],
+              "summary": "Create Order",
+              "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+              "requestBody": {
+              "description": "Post New todo To Database",
+              "required": true,
+              "content": {
+                  "application/json": {
+                  "schema": {
+                      "$ref": "#/components/schemas/OrderDetails"
+                     }
+                 }
+              }
+            },
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/OrderDetails"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/OrderDetails"
+                    }
+            }
+            }
+            }
+       },
+
+          "put": {
+            "tags": [
+              "Update todos on API"
+            ],
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "description": "todo id to update",
+                "required": true,
+                "type": "integer",
+                "schema": {
+                  "$ref": "#/components/schemas/Id"
+                }
+              }
+            ],
+            "summary": "Update Todo",
+            "requestBody": {
+              "description": "Update Existing todo On Database",
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/update"
+                  }
+                }
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                  "$ref": "#/components/schemas/Users"
+                }
+              },
+              "404": {
+                "description": "NOT FOUND",
+                "schema": {
+                  "$ref": "#/components/schemas/Users"
+                }
+              }
+            }
+          },
+
+
+        "delete": {
+            "tags": [
+                "Delete todo to API"
+            ],
+            "parameters": [{
+                "name": "id",
+                "in": "path",
+                "description": "product id to delete",
+                "required": true,
+                "type": "integer",
+                "schema" : {
+                    "$ref": "#/components/schemas/Id"
+                }
+            }],
+            "summary": "Delete todo",
+
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/Users"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/Users"
+                    }
+            }
+            }
+        }
+
+        }
+  }
+

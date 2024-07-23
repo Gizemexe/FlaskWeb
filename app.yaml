@@ -2,7 +2,13 @@ runtime: python312
 entrypoint: gunicorn -b :$PORT src.main:app
 
 env_variables:
-  # Diğer çevresel değişkenler
+  SECRET_KEY: dev
+  JWT_SIGNING_KEY: "myhmacsecretkey"
+  API_KEY: "AIzaSyAx2gy4gJOTLK3twdfIJ8MDo02gxP8tH9A"
+  SQLALCHEMY_DATABASE_URI: "mssql+pyodbc://DenemeUser:123@GizemASUS\\SQLEXPRESS/Deneme?driver=ODBC+Driver+17+for+SQL+Server"
+  DRIVER_NAME: "SQL SERVER"
+  SERVER_NAME: "GizemASUS\\SQLEXPRESS"
+  DATABASE_NAME: "Deneme"
   LD_LIBRARY_PATH: "/path/to/odbc/libraries"
 
 handlers:

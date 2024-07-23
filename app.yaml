@@ -1,5 +1,5 @@
-runtime: python3124
-entrypoint: gunicorn -b :$PORT src:app
+runtime: python312
+entrypoint: gunicorn -b :$PORT src.main:app
 
 env_variables:
   # Diğer çevresel değişkenler

@@ -1,4 +1,3 @@
-import socketio
 from flask import Flask, make_response, jsonify
 import os
 import pyodbc
@@ -14,14 +13,15 @@ from src.Presentation.Controllers.MapController import map
 from src.Infrastructure.Database.database import db
 from flask_swagger_ui import get_swaggerui_blueprint
 from flask_cors import CORS
-from googlemaps import Client
 from flask_socketio import SocketIO
 from dotenv import load_dotenv
 
+socketio = SocketIO()
+
 def create_app(test_config=None):
-    app = Flask(__name__, instance_relative_config=True)
+    app = Flask(__name__)
     load_dotenv()
-    socketio = SocketIO(app)
+
     if test_config is None:
         app.config.from_mapping(
             SECRET_KEY=os.environ.get("SECRET_KEY"),
@@ -116,11 +116,12 @@ def create_app(test_config=None):
     except Exception as e:
         print("MSSQL veritabanına bağlanırken bir hata oluştu:", e)
 
+    socketio.init_app(app)
     return app
 
+app = create_app()
+
 if __name__ == '__main__':
-    app = create_app()
-    app.run()
-    #socketio.run(app, host='0.0.0.0', port=8080, debug=True)
+    socketio.run(app, host='0.0.0.0', port=8080, debug=True)
 
 

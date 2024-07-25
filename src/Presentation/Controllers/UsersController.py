@@ -9,11 +9,8 @@ from src.Application.Features.User.Queries.GetAllUserQuery import GetAllUsersQue
 from src.Application.Features.User.Queries.GetUserQuery import GetUserQuery
 from src.Infrastructure.Services.UserService import UserService
 from src.Infrastructure.Repositories.UserRepository import UserRepositoryImpl
-from src.Domain.Entities.Product import Products
 from src.Application.Security.JWT import Token
 from src.Domain.Entities.User import Users
-from src.Domain.Entities.Favorites import Favorites
-from src.Domain.Schemas.UserSchema import schema
 from src.Infrastructure.Services.AuthService import AuthService
 from src.Infrastructure.Database.database import db
 from src.config import JwtSettings
@@ -188,105 +185,3 @@ def change_password():
         db.session.rollback()  # Rollback the transaction in case of error
         print('Error updating password:', e)
         return jsonify({'message': 'Failed to update password.'}), 500
-
-@users.route("/AddFavorite", methods=["POST"])
-def add_favorite():
-    token = request.headers.get('Authorization')
-    print("Received token:", token)
-
-    if token is None or not token.startswith('Bearer '):
-        return jsonify({'message': 'Unauthorized'}), 401
-
-    jwt_token = token.split('Bearer ')[1]
-    print("JWT token:", jwt_token)
-
-    user_id = Token.get_user_id(jwt_token)
-    if user_id is None:
-        return jsonify({'message': 'Invalid token'}), 401
-
-    print("User ID:", user_id)
-
-    user = Users.query.get(user_id)
-    if user is None:
-        return jsonify({'message': 'User not found'}), 404
-
-    product_id = request.json.get("product_id")
-    if product_id is None:
-        return jsonify({'message': 'Product ID is required'}), 400
-
-    # Kontrol: Ürün zaten favorilerde mi?
-    existing_favorite = Favorites.query.filter_by(UserId=user_id, ProductId=product_id).first()
-    if existing_favorite:
-        return jsonify({'message': 'Product already in favorites'}), 400
-
-    # Favori ürünü ekleme
-    new_favorite = Favorites(UserId=user_id, ProductId=product_id)
-
-    new_favorite.save()  # Favoriyi kaydet
-    return jsonify({'message': 'Product added to favorites'}), 200
-
-@users.route("/RemoveFavorite", methods=["DELETE"])
-def remove_favorite():
-    token = request.headers.get('Authorization')
-    if token is None or not token.startswith('Bearer '):
-        return jsonify({'message': 'Unauthorized'}), 401
-
-    jwt_token = token.split('Bearer ')[1]
-    user_id = Token.get_user_id(jwt_token)
-
-    if user_id is None:
-        return jsonify({'message': 'Invalid token'}), 401
-
-    # Kullanıcının favori ürünlerinden kaldırılacak ürünü al
-    product_id = request.json.get("product_id")
-    if product_id is None:
-        return jsonify({'message': 'Product ID is required'}), 400
-
-    # Favori ürünü kullanıcının favori listesinden kaldır
-    user = Users.query.get(user_id)
-    if user is None:
-        return jsonify({'message': 'User not found'}), 404
-
-    favorite_item = Favorites.query.filter_by(UserId=user_id, ProductId=product_id).first()
-    if favorite_item:
-        db.session.delete(favorite_item)  # Favori ürünü veritabanından sil
-        db.session.commit()  # Veritabanında değişiklikleri kaydet
-        return jsonify({'message': 'Product removed from favorites'}), 200
-    else:
-        return jsonify({'message': 'Product is not in favorites'}), 400
-
-
-@users.route("/GetFavorites", methods=["GET"])
-def get_favorites():
-    token = request.headers.get('Authorization')
-
-    if token is None or not token.startswith('Bearer '):
-        return jsonify({'message': 'Unauthorized'}), 401
-
-    jwt_token = token.split('Bearer ')[1]
-    user_id = Token.get_user_id(jwt_token)
-
-    if user_id is None:
-        return jsonify({'message': 'Invalid token'}), 401
-
-    user = Users.query.get(user_id)
-    if user is None:
-        return jsonify({'message': 'User not found'}), 404
-
-    # Kullanıcının favori ürünlerini çekme
-    favorites = Favorites.query.filter_by(UserId=user_id).all()
-    favorite_products = []
-    for favorite in favorites:
-        product = Products.query.get(favorite.ProductId)
-        if product:
-            favorite_products.append({
-                'Id': product.Id,
-                'Code': product.Code,
-                'Name': product.Name,
-                'Price': product.Price,
-                'Description': product.Description,
-                'Image': product.Image or '',
-                'Stock': product.Stock,
-            })
-
-    return jsonify({'favorite_products': favorite_products}), 200

@@ -1,4 +1,3 @@
-# src/Application/Features/Product/Queries/GetProductsQuery.py
 from src.Infrastructure.Repositories.ProductRepository import ProductsRepositoryImpl
 from src.Application.DTOs.ProductDto import ProductDTO
 from src.Application.Features.Product.Mapping.ProductMapper import ProductMapper

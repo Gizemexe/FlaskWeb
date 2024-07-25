@@ -6,9 +6,6 @@ from src.Application.Features.Product.Mapping.ProductMapper import ProductMapper
 from src.Infrastructure.Services.ProductService import ProductService
 from src.Application.Features.Product.Queries.GetProductsQuery import GetProductsQuery
 from src.Infrastructure.Repositories.ProductRepository import ProductsRepositoryImpl
-from src.Domain.Entities.User import Users
-from src.Domain.Entities.Product import Products
-from src.Domain.Schemas.ProductSchema import schema
 import re
 
 products = Blueprint('products', __name__, url_prefix="/api/v1/products")

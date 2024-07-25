@@ -42,6 +42,9 @@
       <sourceFolder url="file://$MODULE_DIR$/Content/Images" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Content/Images/Products" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/instance" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Application/Features/Category" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Application/Features/Category/Mapping" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Application/Features/Category/Queries" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
     <orderEntry type="inheritedJdk" />

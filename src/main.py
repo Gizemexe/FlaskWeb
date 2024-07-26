@@ -1,6 +1,6 @@
 from flask import Flask, make_response, jsonify
 import os
-import pyodbc
+import pymssql
 from src.Presentation.Controllers.UsersController import users
 from src.Presentation.Controllers.ProductsController import products
 from src.Presentation.Controllers.CategoriesController import categories
@@ -10,7 +10,8 @@ from src.Presentation.Controllers.AuthController import auth
 from src.Presentation.Controllers.OrdersController import orders
 from src.Presentation.Controllers.OrdersDetailsController import orderDetails
 from src.Presentation.Controllers.MapController import map
-from src.Infrastructure.Database.database import db
+from src.Infrastructure.Database.database import db,ma
+from src.config import Config
 from flask_swagger_ui import get_swaggerui_blueprint
 from flask_cors import CORS
 from flask_socketio import SocketIO
@@ -20,19 +21,22 @@ socketio = SocketIO()
 
 def create_app(test_config=None):
     app = Flask(__name__)
+    app.config.from_object(Config)
     load_dotenv()
+
+
 
     if test_config is None:
         app.config.from_mapping(
             SECRET_KEY=os.environ.get("SECRET_KEY"),
-            SQLALCHEMY_DATABASE_URI = r'mssql+pyodbc://DenemeUser:123@GizemASUS\SQLEXPRESS/Deneme?driver=ODBC+Driver+17+for+SQL+Server'
+            SQLALCHEMY_DATABASE_URI=os.environ.get("SQLALCHEMY_DATABASE_URI")
 
         )
     else:
        app.config.from_mapping(test_config)
 
-    db.app=app
     db.init_app(app)
+    ma.init_app(app)
     CORS(app)
     app.register_blueprint(users)
     app.register_blueprint(products)
@@ -93,25 +97,16 @@ def create_app(test_config=None):
     def handle_disconnect():
         print("Client disconnected")
 
+    print(os.environ.get("USERNAME"))
+    print(os.environ.get("PASSWORD"))
+    print(os.environ.get("DATABASE_NAME"))
+    print(os.environ.get("SERVER_NAME"))
+    print(os.environ.get("SQLALCHEMY_DATABASE_URI"))
     # MSSQL bağlantısı
-    DRIVER_NAME = 'ODBC Driver 17 for SQL Server'
-    SERVER_NAME = 'GizemASUS\\SQLEXPRESS'
-    DATABASE_NAME = 'Deneme'
-    USERNAME = 'DenemeUser'  # Veritabanı kullanıcı adı
-    PASSWORD = '123'  # Veritabanı parolası
-
-    connection_string = f"""
-          DRIVER={{{DRIVER_NAME}}};
-          SERVER={SERVER_NAME};
-          DATABASE={DATABASE_NAME};
-          UID={USERNAME};
-          PWD={PASSWORD};
-          Trust_Connection=yes;
-       """
-
-    # Veritabanı bağlantısını oluştur
     try:
-        conn = pyodbc.connect(connection_string)
+        conn = pymssql.connect(
+            server='35.242.208.225', user='sqlserver', password='JzOTAk-}h"jPpBC0', database='Deneme'
+        )
         print("MSSQL veritabanına başarıyla bağlandı.")
     except Exception as e:
         print("MSSQL veritabanına bağlanırken bir hata oluştu:", e)

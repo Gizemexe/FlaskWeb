@@ -5,9 +5,10 @@ env_variables:
   SECRET_KEY: dev
   JWT_SIGNING_KEY: "myhmacsecretkey"
   API_KEY: "AIzaSyAx2gy4gJOTLK3twdfIJ8MDo02gxP8tH9A"
-  SQLALCHEMY_DATABASE_URI: "mssql+pyodbc://DenemeUser:123@GizemASUS\\SQLEXPRESS/Deneme?driver=ODBC+Driver+17+for+SQL+Server"
-  DRIVER_NAME: "SQL SERVER"
-  SERVER_NAME: "GizemASUS\\SQLEXPRESS"
+  SQLALCHEMY_DATABASE_URI: 'mssql+pymssql://sqlserver:JzOTAk-}h"jPpBC0@35.242.208.225/Deneme'
+  SERVER_NAME: "35.242.208.225"
+  USERNAME: "sqlserver"
+  PASSWORD: "JzOTAk-}h\"jPpBC0"
   DATABASE_NAME: "Deneme"
   LD_LIBRARY_PATH: "/path/to/odbc/libraries"
 

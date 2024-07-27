@@ -97,7 +97,7 @@ def create_app(test_config=None):
     def handle_disconnect():
         print("Client disconnected")
 
-    print(os.environ.get("USERNAME"))
+    print(os.environ.get("SERVER_USERNAME"))
     print(os.environ.get("PASSWORD"))
     print(os.environ.get("DATABASE_NAME"))
     print(os.environ.get("SERVER_NAME"))
@@ -105,7 +105,10 @@ def create_app(test_config=None):
     # MSSQL bağlantısı
     try:
         conn = pymssql.connect(
-            server='35.242.208.225', user='sqlserver', password='JzOTAk-}h"jPpBC0', database='Deneme'
+            server=os.environ.get("SERVER_NAME"),
+            user=os.environ.get("SERVER_USERNAME"),
+            password=os.environ.get("PASSWORD"),
+            database=os.environ.get("DATABASE_NAME")
         )
         print("MSSQL veritabanına başarıyla bağlandı.")
     except Exception as e:

@@ -1,16 +1,18 @@
 runtime: python312
 entrypoint: gunicorn -b :$PORT src.main:app
 
+
 env_variables:
   SECRET_KEY: dev
   JWT_SIGNING_KEY: "myhmacsecretkey"
-  API_KEY: "AIzaSyAx2gy4gJOTLK3twdfIJ8MDo02gxP8tH9A"
-  SQLALCHEMY_DATABASE_URI: 'mssql+pymssql://sqlserver:JzOTAk-}h"jPpBC0@35.242.208.225/Deneme'
-  SERVER_NAME: "35.242.208.225"
-  USERNAME: "sqlserver"
-  PASSWORD: "JzOTAk-}h\"jPpBC0"
+  API_KEY: "AIzaSyCMVC9T5XEDsOUfrYxCwkGzOaF8xVUUZLs"
+  SQLALCHEMY_DATABASE_URI: 'mssql+pymssql://sqlserver:?ZPS*LkZE0KRrB89@34.32.51.61:1433/Deneme'
+  SERVER_NAME: "34.32.51.61"
+  SERVER_USERNAME: "sqlserver"
+  PASSWORD: '?ZPS*LkZE0KRrB89'
   DATABASE_NAME: "Deneme"
-  LD_LIBRARY_PATH: "/path/to/odbc/libraries"
+  CONNECTION_NAME: "acquired-talent-433007-j4:europe-west10:sqlserver1"
+
 
 handlers:
 - url: /.*

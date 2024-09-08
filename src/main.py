@@ -21,9 +21,8 @@ socketio = SocketIO()
 
 def create_app(test_config=None):
     app = Flask(__name__)
-    app.config.from_object(Config)
     load_dotenv()
-
+    app.config.from_object(Config)
 
 
     if test_config is None:
@@ -97,6 +96,7 @@ def create_app(test_config=None):
     def handle_disconnect():
         print("Client disconnected")
 
+    # MSSQL bağlantısı
     print(os.environ.get("SERVER_USERNAME"))
     print(os.environ.get("PASSWORD"))
     print(os.environ.get("DATABASE_NAME"))

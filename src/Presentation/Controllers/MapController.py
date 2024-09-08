@@ -5,7 +5,6 @@ from src.Domain.Entities.Order import Orders
 from googlemaps import Client
 from src.config import Config
 
-print(f"API Key in MapController: {Config.API_KEY}")
 #API_KEY = os.environ.get("API_KEY")
 gmaps = Client(key=Config.API_KEY)
 
